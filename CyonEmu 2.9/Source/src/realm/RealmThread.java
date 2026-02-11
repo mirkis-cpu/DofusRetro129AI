@@ -131,6 +131,7 @@ public class RealmThread implements Runnable{
 				_accountName = packet.toLowerCase();
 				break;
 			case 3://HashPass
+				System.out.println("[LOGIN] case3 account=" + _accountName + " pktlen=" + packet.length());
 				if(!packet.substring(0, 2).equalsIgnoreCase("#1"))
 				{
 					try {
@@ -139,6 +140,7 @@ public class RealmThread implements Runnable{
 				}
 				_hashPass = packet;
 				
+				System.out.println("[LOGIN] trying COMPTE_LOGIN: " + _accountName);
 				if(Compte.COMPTE_LOGIN(_accountName,_hashPass,_hashKey))
 				{
 					_compte = World.getCompteByName(_accountName);
@@ -282,9 +284,11 @@ public class RealmThread implements Runnable{
 					{
 						try
 						{
+							System.out.println("[AUTO-REG] Attempting for: " + _accountName);
 							String decryptedPass = CryptManager.decryptpass(_hashPass.substring(2), _hashKey);
 							String ip = _s.getInetAddress().getHostAddress();
 							int newGuid = SQLManager.CREATE_ACCOUNT(_accountName, decryptedPass, ip);
+							System.out.println("[AUTO-REG] CREATE_ACCOUNT returned guid=" + newGuid);
 							if(newGuid > 0)
 							{
 								Compte C = new Compte(newGuid, _accountName, decryptedPass, _accountName, "DELETE?", "DELETE", 0, 1, false, ip, "", "", 0, "", "", 0, 0);
@@ -303,6 +307,8 @@ public class RealmThread implements Runnable{
 							}
 						}catch(Exception e)
 						{
+							System.out.println("[AUTO-REG] ERROR: " + e.getMessage());
+							e.printStackTrace();
 							RealmServer.addToLog("Auto-register error: " + e.getMessage());
 							SocketManager.REALM_SEND_LOGIN_ERROR(_out);
 							try { this._s.close(); } catch (IOException e2) {}

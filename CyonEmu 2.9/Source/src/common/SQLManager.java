@@ -188,8 +188,8 @@ public class SQLManager {
 		try
 		{
 			PreparedStatement p = (PreparedStatement) othCon.prepareStatement(
-				"INSERT INTO accounts (account, pass, pseudo, question, reponse, level, vip, banned, lastIP, lastConnectionDate, bank, friends, enemy, cadeau, points, bankKamas) " +
-				"VALUES (?, ?, ?, 'DELETE?', 'DELETE', 0, 1, 0, ?, '', '', '', '', 0, 0, 0)",
+				"INSERT INTO accounts (account, pass, pseudo, email, question, reponse, level, vip, banned, lastIP, lastConnectionDate, bank, friends, enemy, cadeau, points, bankKamas) " +
+				"VALUES (?, ?, ?, '', 'DELETE?', 'DELETE', 0, 1, 0, ?, '', '', '', '', 0, 0, 0)",
 				java.sql.Statement.RETURN_GENERATED_KEYS);
 			p.setString(1, name);
 			p.setString(2, pass);

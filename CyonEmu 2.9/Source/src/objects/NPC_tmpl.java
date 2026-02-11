@@ -115,10 +115,38 @@ public class NPC_tmpl {
 			sock.append(_orientation).append(";");
 			sock.append("0").append(";");
 			sock.append(_guid).append(";");
-			// Custom shop NPCs (id>1234) → use Cape Merchant (1158) client ID for Buy/Sell
+			// Custom NPCs (id>1234) → map to known client NPC IDs for proper names
 			int clientId = _template.get_id();
-			if(clientId > 1234 && !_template._ventes.isEmpty())
-				clientId = 1158;
+			if(clientId > 1234)
+			{
+				// Profession learners: map by bonusValue (job ID) to Astrubian Merchant equivalents
+				switch(_template.get_bonusValue())
+				{
+					case 2:  clientId = 554;  break; // Lumberjack
+					case 11: clientId = 552;  break; // Shoemaker
+					case 13: clientId = 555;  break; // Jeweller
+					case 14: clientId = 548;  break; // Carver
+					case 15: case 16: case 17: case 18: case 19: case 43:
+					         clientId = 547;  break; // Blacksmith (all forge types + shields)
+					case 20: case 60:
+					         clientId = 548;  break; // Carver (bows, wands)
+					case 24: clientId = 550;  break; // Miner
+					case 25: clientId = 561;  break; // Baker
+					case 26: clientId = 557;  break; // Alchemist
+					case 27: clientId = 560;  break; // Tailor
+					case 28: clientId = 551;  break; // Farmer
+					case 31: clientId = 562;  break; // Fisherman
+					case 36: clientId = 563;  break; // Hunter
+					case 41: clientId = 553;  break; // Butcher
+					case 56: clientId = 559;  break; // Fishmonger
+					case 58: clientId = 1220; break; // Handyman
+					// FM specializations → Rune Merchant
+					case 44: case 45: case 46: case 47: case 48:
+					case 49: case 50: case 62: case 63: case 64: case 65:
+					         clientId = 790;  break; // Rune Merchant
+					default: clientId = 1158; break; // Cape Merchant (fallback)
+				}
+			}
 			sock.append(clientId).append(";");
 			sock.append("-4").append(";");//type = NPC
 			

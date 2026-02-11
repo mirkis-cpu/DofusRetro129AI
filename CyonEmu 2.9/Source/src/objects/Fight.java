@@ -229,6 +229,7 @@ public class Fight
 			_PDVMAX = perso.get_PDVMAX();
 			_PDV = perso.get_PDV();
 			_gfxID = getDefaultGfx();
+			GameServer.addToLog("DEBUG Fighter init: perso=" + perso.get_name() + " classe=" + perso.get_classe() + " lvl=" + perso.get_lvl() + " PDVMAX=" + _PDVMAX + " PDV=" + _PDV + " baseVita=" + perso.getTotalStats().getEffect(125) + " baseVie=" + perso.getTotalStats().getEffect(110));
 		}
 
 		public Fighter(Fight f, Percepteur Perco) {
@@ -3019,6 +3020,7 @@ public class Fight
 			verifIfTeamAllDead();
 		}else if (fighter.getMob() != null || fighter.isInvocation())
 		{
+			_curAction = "";
 			return 10;
 		}
 		if(fighter.getPersonnage() != null)

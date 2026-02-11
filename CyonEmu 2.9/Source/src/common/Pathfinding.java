@@ -121,7 +121,7 @@ public class Pathfinding {
             {
             	if(fight != null && fight.isOccuped(dirCaseID))return "stop:"+lastPos;
             	
-            	if(map.getCase(dirCaseID).isWalkable(true))return "ok:";
+            	if(map.getCase(dirCaseID).isWalkable(fight != null))return "ok:";
             	else
             	{
             		_nSteps--;
@@ -131,7 +131,7 @@ public class Pathfinding {
             else {
             	int prevPos = lastPos;
             	lastPos = GetCaseIDFromDirrection(lastPos, dir, map, fight!=null);
-            	if(lastPos < 0 || map.getCase(lastPos) == null || !map.getCase(lastPos).isWalkable(true))
+            	if(lastPos < 0 || map.getCase(lastPos) == null || !map.getCase(lastPos).isWalkable(fight != null))
             	{
             		_nSteps--;
             		return "stop:"+prevPos;

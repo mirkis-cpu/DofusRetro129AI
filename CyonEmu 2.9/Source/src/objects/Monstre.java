@@ -49,7 +49,7 @@ public class Monstre
 		{
 			id = Aid;
 			align = Aalign;
-			//Détermination du nombre de mob du groupe
+			//Dï¿½termination du nombre de mob du groupe
 
 			int rand = 0;
 			int nbr = 0;
@@ -144,7 +144,7 @@ public class Monstre
 						nbr = 8;
 					break;
 			}
-			//On vérifie qu'il existe des monstres de l'alignement demandé pour éviter les boucles infinies
+			//On vï¿½rifie qu'il existe des monstres de l'alignement demandï¿½ pour ï¿½viter les boucles infinies
 			boolean haveSameAlign = false;
 			for(MobGrade mob : possibles)
 			{
@@ -190,7 +190,6 @@ public class Monstre
 			id = Aid;
 			align = Constants.ALIGNEMENT_NEUTRE;
 			cellID = cID;
-			aggroDistance = Constants.getAggroByLevel(maxLevel);
 			isFix = true;
 			int guid = -1;
 			for(String data : groupData.split(";"))
@@ -207,10 +206,13 @@ public class Monstre
 					for(MobGrade MG : m.getGrades().values())if(MG.level >=min && MG.level<=max)mgs.add(MG);
 					if(mgs.isEmpty())continue;
 					//On prend un grade au hasard entre 0 et size -1 parmis les mobs possibles
-					_Mobs.put(guid, mgs.get(Formulas.getRandomValue(0, mgs.size()-1)));
+					MobGrade selected = mgs.get(Formulas.getRandomValue(0, mgs.size()-1));
+					if(selected.level > maxLevel) maxLevel = selected.level;
+					_Mobs.put(guid, selected);
 					guid--;
 				}catch(Exception e){continue;};
 			}
+			aggroDistance = Constants.getAggroByLevel(maxLevel);
 			orientation = (Formulas.getRandomValue(0, 3)*2)+1;
 			creationTime = System.currentTimeMillis();
 		}

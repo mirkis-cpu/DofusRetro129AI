@@ -5,7 +5,7 @@
 # Configuration du serveur du jeu.
 GAME_PORT = 5555
 REALM_PORT = 4444
-HOST_IP = 0.0.0.0
+HOST_IP = 10.8.0.1
 SAVE_TIME = 30
 PLAYER_LIMIT = 200
 PLAYER_IP = 4

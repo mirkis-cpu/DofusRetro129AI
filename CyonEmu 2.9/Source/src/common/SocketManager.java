@@ -938,6 +938,7 @@ public class SocketManager {
 			packet.append((f.isHide()?"-1":f.get_fightCell().getID())).append(";");//On envoie pas la cell d'un invisible :p
 			packet.append(";");//??
 			packet.append(f.getPDVMAX());
+			GameServer.addToLog("DEBUG GTM: fighter=" + f.getGUID() + " type=" + f.getType() + " PDV=" + f.getPDV() + " PDVMAX=" + f.getPDVMAX() + " buffVita=" + f.getBuffValue(125));
 		}
 		for(Fighter f : fight.getFighters(teams))
 		{
@@ -945,6 +946,7 @@ public class SocketManager {
 			if(f.getPersonnage() == null || !f.getPersonnage().isOnline())continue;
 			send(f.getPersonnage(),packet.toString());
 		}
+		GameServer.addToLog("DEBUG GTM packet: " + packet.toString());
 		if(CyonEmu.CONFIG_DEBUG)
 			GameServer.addToSockLog("Game: Fight : Send>>"+packet.toString());
 	}

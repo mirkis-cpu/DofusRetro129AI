@@ -5,8 +5,8 @@
 	<rcount value="10"/>
 
 	<conf name="Miro">
-		<connserver name="Miro" ip="127.0.0.1" port="4444"/>
-		<dataserver url="http://localhost/game/" priority="5"/>
+		<connserver name="Miro" ip="10.8.0.1" port="4444"/>
+		<dataserver url="http://10.8.0.1:8880/game/" priority="5"/>
 		<dataserver url="/data" type="local" priority="4"/>
 	</conf>
 	<cacheasbitmap>

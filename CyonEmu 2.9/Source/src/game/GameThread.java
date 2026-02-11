@@ -1982,6 +1982,17 @@ public class GameThread implements Runnable
 			return;
 		}
 		T.applyAction(_perso, Target, guid, cellID);
+		// XP Parchments (Parchemin Doré, Blanc, d'Ivoire) - stat 0x25d (605) = experience
+		if(T.getType() == Constants.ITEM_TYPE_PARCHO_EXP)
+		{
+			int xpValue = obj.getStats().getEffect(605);
+			if(xpValue > 0)
+			{
+				_perso.addXp(xpValue);
+				_perso.removeItem(guid, 1, true, true);
+				SocketManager.GAME_SEND_Ow_PACKET(_perso);
+			}
+		}
 		if(T.getType() == Constants.ITEM_TYPE_PAIN || T.getType() == Constants.ITEM_TYPE_VIANDE_COMESTIBLE)
             SocketManager.GAME_SEND_eUK_PACKET_TO_MAP(_perso.get_curCarte(), _perso.get_GUID(), 17);
         else if(T.getType() == Constants.ITEM_TYPE_BIERE)
@@ -2367,6 +2378,39 @@ public class GameThread implements Runnable
 					SocketManager.GAME_SEND_ITEM_VENDOR_LIST_PACKET(_out, npc);
 					_perso.set_isTalkingWith(0);
 					_perso.set_isTradingWith(npcID);
+				}
+				else if(npc.get_template().get_bonusValue() > 0)
+				{
+					// Profession learner NPC - bonusValue = job ID
+					SocketManager.GAME_SEND_END_DIALOG_PACKET(_out);
+					int jobID = npc.get_template().get_bonusValue();
+					Metier metier = World.getMetier(jobID);
+					if(metier != null)
+					{
+						// Check basic vs FM profession
+						boolean isBasic = (jobID == 2 || jobID == 11 || jobID == 13 || jobID == 14 ||
+							jobID == 15 || jobID == 16 || jobID == 17 || jobID == 18 ||
+							jobID == 19 || jobID == 20 || jobID == 24 || jobID == 25 ||
+							jobID == 26 || jobID == 27 || jobID == 28 || jobID == 31 ||
+							jobID == 36 || jobID == 41 || jobID == 56 || jobID == 58 ||
+							jobID == 60 || jobID == 65 || jobID == 43);
+						if(_perso.getMetierByID(jobID) != null)
+						{
+							SocketManager.GAME_SEND_Im_PACKET(_perso, "111");
+						}
+						else if(isBasic && _perso.totalJobBasic() > 2)
+						{
+							SocketManager.GAME_SEND_Im_PACKET(_perso, "19");
+						}
+						else if(!isBasic && _perso.totalJobFM() > 2)
+						{
+							SocketManager.GAME_SEND_Im_PACKET(_perso, "19");
+						}
+						else
+						{
+							_perso.learnJob(metier);
+						}
+					}
 				}
 				else
 				{
@@ -3414,7 +3458,7 @@ public class GameThread implements Runnable
 				SocketManager.GAME_SEND_MESSAGE(_perso, "Merci pour achet� ! \nIl te reste "+_compte.get_points()+" points de boutique pour continuer achete",  CyonEmu.CONFIG_MOTD_COLOR);
 				
 			}else{
-			int prix = template.getPrix() * qua;
+			int prix = template.getLevel() * 3000 * qua;
 			if(_perso.get_kamas()<prix)//Si le joueur n'a pas assez de kamas
 			{
 				SocketManager.GAME_SEND_BUY_ERROR_PACKET(_out);
@@ -3993,6 +4037,10 @@ public class GameThread implements Runnable
 					   + "\n<b>.koli</b> - Register for Kolizeum"
 					   + "\n<b>.infokoli</b> - Show Kolizeum info"
 					   + "\n<b>.points</b> - Show your shop points";
+				if(_compte.get_gmLvl() >= 1) {
+					cmds += "\n\n<b>GM Commands:</b>"
+					   + "\n<b>.goto mapID [cellID]</b> - Teleport to map";
+				}
 				if(_compte.get_vip() >= 1) {
 					cmds += "\n\n<b>VIP Commands:</b>"
 					   + "\n<b>.vie</b> - Full HP heal"
@@ -4717,8 +4765,38 @@ public class GameThread implements Runnable
 					SQLManager.SAVE_PERSONNAGE(_perso,true);
 					SocketManager.GAME_SEND_MESSAGE(_perso,  "<b>" + _perso.get_name()+"</b> a �t� sauvegard�.", CyonEmu.CONFIG_MOTD_COLOR);
 					return;
+			}else if(msg.length() > 4 && msg.substring(1, 5).equalsIgnoreCase("goto"))
+				{
+					if(_compte.get_gmLvl() < 1) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "You need GM level to use this command.", CyonEmu.CONFIG_MOTD_COLOR);
+						return;
+					}
+					if(_perso.get_fight() != null) return;
+					String[] args = msg.substring(1).split(" ");
+					if(args.length < 2) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Usage: .goto mapID [cellID]", CyonEmu.CONFIG_MOTD_COLOR);
+						return;
+					}
+					try {
+						short mapID = Short.parseShort(args[1]);
+						int cellID = 300;
+						if(args.length >= 3) cellID = Integer.parseInt(args[2]);
+						if(World.getCarte(mapID) == null) {
+							SocketManager.GAME_SEND_MESSAGE(_perso, "Map " + mapID + " not found.", CyonEmu.CONFIG_MOTD_COLOR);
+							return;
+						}
+						if(World.getCarte(mapID).getCase(cellID) == null) {
+							SocketManager.GAME_SEND_MESSAGE(_perso, "Cell " + cellID + " not found on map " + mapID + ".", CyonEmu.CONFIG_MOTD_COLOR);
+							return;
+						}
+						_perso.teleport(mapID, cellID);
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Teleported to map " + mapID + " cell " + cellID + ".", CyonEmu.CONFIG_MOTD_COLOR);
+					} catch(NumberFormatException e) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Usage: .goto mapID [cellID]", CyonEmu.CONFIG_MOTD_COLOR);
+					}
+					return;
 			}else
-				SocketManager.GAME_SEND_MESSAGE(_perso,"La <b>commande</b> que tu as �crit est incorrect. Tape <b>.commandes</b> pour voir tous les commandes disponnibles!", CyonEmu.CONFIG_MOTD_COLOR);
+				SocketManager.GAME_SEND_MESSAGE(_perso,"La <b>commande</b> que tu as \u00e9crit est incorrect. Tape <b>.commandes</b> pour voir tous les commandes disponnibles!", CyonEmu.CONFIG_MOTD_COLOR);
 			        return;
 			}
 			if(_perso.get_fight() == null)
@@ -5042,10 +5120,13 @@ public class GameThread implements Runnable
 					_perso.set_curCell(_perso.get_curCarte().getCase(newCellID));
 					_perso.set_orientation(CryptManager.getIntByHashedValue(path.charAt(path.length()-3)));
 					_perso.get_curCell().addPerso(_perso);
+					if(!_perso._isGhosts) _perso.set_away(false);
 					SocketManager.GAME_SEND_BN(_out);
+					_perso.get_curCarte().onPlayerArriveOnCell(_perso, _perso.get_curCell().getID(), _perso.is_hasEndFight());
+					_perso.set_hasEndFight(false);
 				}
 			break;
-			
+
 			case 500://Action Sur Map
 				_perso.finishActionOnCell(GA);
 				_perso.setGameAction(null);

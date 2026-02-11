@@ -44,7 +44,9 @@ public class IA
       {
         if (_fighter.isDouble()) {
           try {
-            apply_type5(_fighter, _fight); } catch (Exception localException) {
+            apply_type5(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type5 (double) for " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           }try {
             Thread.sleep(1000L); } catch (InterruptedException localInterruptedException) {
           }
@@ -72,53 +74,77 @@ public class IA
       }
       else {
         int IA_Type = _fighter.getMob().getTemplate().getIAType();
+        int spellCount = _fighter.getMob().getSpells() != null ? _fighter.getMob().getSpells().size() : 0;
+        GameServer.addToLog("[IA] Mob " + _fighter.getGUID() + " (template=" + _fighter.getMob().getTemplate().getID() + ") AI_Type=" + IA_Type + " spells=" + spellCount + " PA=" + _fighter.getPA() + " PM=" + _fighter.getPM());
         switch (IA_Type)
         {
           case 0:
           apply_type0(_fighter, _fight);
           break;
           case 1:
-          try { apply_type1(_fighter, _fight); } catch (Exception localException1) {
+          try { apply_type1(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type1 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
           case 2:
           try {
-            apply_type2(_fighter, _fight); } catch (Exception localException2) {
+            apply_type2(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type2 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
           case 3:
           try {
-            apply_type3(_fighter, _fight); } catch (Exception localException3) {
+            apply_type3(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type3 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
           case 4:
           try {
-            apply_type4(_fighter, _fight); } catch (Exception localException4) {
+            apply_type4(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type4 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
           case 5:
           try {
-            apply_type5(_fighter, _fight); } catch (Exception localException5) {
+            apply_type5(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type5 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
           case 6:
           try {
-            apply_type6(_fighter, _fight); } catch (Exception localException6) {
+            apply_type6(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type6 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
           case 7:
           try {
-            apply_type7(_fighter, _fight); } catch (Exception localException7) {
+            apply_type7(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type7 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
           case 8:
           try {
-            apply_type8(_fighter, _fight); } catch (Exception localException8) {
+            apply_type8(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type8 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
           case 9:
           try {
-            apply_type9(_fighter, _fight); } catch (Exception localException9) {
+            apply_type9(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type9 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
           case 10:
           try {
-            apply_type10(_fighter, _fight); } catch (Exception localException10) {
+            apply_type10(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type10 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
           case 11:
           try {
-            apply_type11(_fighter, _fight); } catch (Exception localException11) {
+            apply_type11(_fighter, _fight); } catch (Exception e) {
+            GameServer.addToLog("[IA] Exception in apply_type11 for mob " + _fighter.getGUID() + ": " + e.getMessage());
+            e.printStackTrace();
           } break;
         }
         try {
@@ -950,6 +976,7 @@ public class IA
     
     private static int attackIfPossible(Fight fight, Fight.Fighter fighter)
     {
+        GameServer.addToLog("[IA] attackIfPossible: mob " + fighter.getGUID() + " cell=" + fighter.get_fightCell().getID() + " PA=" + fighter.getCurPA(fight));
         Map<Integer,Fighter> ennemyList = getLowHpEnnemyList(fight,fighter);
 		SortStats SS = null;
 		Fighter target = null;
@@ -1000,15 +1027,22 @@ public class IA
 
       if ((curTarget > 0) && (cell > 0) && (cell < 480) && (SS2 != null))
       {
+        GameServer.addToLog("[IA] Zone attack: spell=" + SS2.getSpellID() + " cell=" + cell + " targets=" + curTarget);
         int attack = fight.tryCastSpell(fighter, SS2, cell);
+        GameServer.addToLog("[IA] Zone tryCastSpell result=" + attack);
         if (attack != 0)
           return attack;
       }
       else
       {
         if ((target == null) || (SS == null))
+        {
+          GameServer.addToLog("[IA] No valid target or spell found (target=" + (target != null) + " SS=" + (SS != null) + " zoneTargets=" + curTarget + ")");
           return 666;
+        }
+        GameServer.addToLog("[IA] Single attack: spell=" + SS.getSpellID() + " targetCell=" + target.get_fightCell().getID());
         int attack = fight.tryCastSpell(fighter, SS, target.get_fightCell().getID());
+        GameServer.addToLog("[IA] Single tryCastSpell result=" + attack);
         if (attack != 0)
           return attack;
       }

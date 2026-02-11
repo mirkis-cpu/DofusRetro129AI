@@ -651,8 +651,7 @@ public class Constants
 
 	public static int getAggroByLevel(int lvl)
 	{
-		int aggro = 0;
-		aggro = (int)(lvl/50);
+		int aggro = Math.max(1, (int)(lvl/50));
 		if(lvl>500)
 			aggro = 3;
 		return aggro;
