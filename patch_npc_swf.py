@@ -93,41 +93,27 @@ def build_bytecode():
         bc += make_action_push([make_push_int(resp_id), make_push_string(RESPONSE_TEXT)])
         bc += make_set_member()
 
-    # Add NPC names: N.n[npcID] = "name"
-    for npc_id, name, resp_id in NPCS:
-        bc += make_action_push([make_push_string("N")])
-        bc += make_get_variable()
-        bc += make_action_push([make_push_string("n")])
-        bc += make_get_member()
-        bc += make_action_push([make_push_int(npc_id), make_push_string(name)])
-        bc += make_set_member()
-
     # Add NPC data: N.d[npcID] = {n: "name", a: [responseID]}
-    # Pattern from SWF: push npcID, "n", name, "a", responseID, actionCount
-    #   InitObject → push arraySize → InitArray → SetMember
+    # Exact pattern from original SWF:
+    #   Push N → GetVar → Push "d" → GetMember → stack: N.d
+    #   Push npcID, "n", name, "a", respID, 1 → InitArray → Push 2 → InitObject → SetMember
     for npc_id, name, resp_id in NPCS:
         bc += make_action_push([make_push_string("N")])
         bc += make_get_variable()
         bc += make_action_push([make_push_string("d")])
         bc += make_get_member()
-        # Stack: N.d
-        # Now push: npcID, then the object {n: name, a: [resp_id]}
-        # InitObject expects pairs on stack: key1, val1, key2, val2, ..., count
-        # InitArray expects: elem1, elem2, ..., count
-        # We need: N.d[npcID] = {n: name, a: [resp_id]}
-        # Push: npcID (key for SetMember)
-        # Then build the object:
-        #   push "a" (key), then build array [resp_id]: push resp_id, int:1, InitArray
-        #   push "n" (key), name (value)
-        #   push int:2 (2 properties), InitObject
-        bc += make_action_push([make_push_int(npc_id)])
-        # Build: push "a", [resp_id array]
-        bc += make_action_push([make_push_string("a")])
-        bc += make_action_push([make_push_int(resp_id), make_push_int(1)])
-        bc += b'\x42'  # InitArray (1 element)
-        bc += make_action_push([make_push_string("n"), make_push_string(name)])
+        # Push all data in one go, matching original pattern exactly
+        bc += make_action_push([
+            make_push_int(npc_id),
+            make_push_string("n"),
+            make_push_string(name),
+            make_push_string("a"),
+            make_push_int(resp_id),
+            make_push_int(1)
+        ])
+        bc += b'\x42'  # InitArray (1 element → [respID])
         bc += make_action_push([make_push_int(2)])
-        bc += b'\x43'  # InitObject (2 properties)
+        bc += b'\x43'  # InitObject (2 props → {n: name, a: [respID]})
         bc += make_set_member()
 
     # End action

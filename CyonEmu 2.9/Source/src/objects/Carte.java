@@ -305,7 +305,7 @@ public class Carte {
 		public boolean isWalkable()
 		{
 			if(_template == null)return false;
-			return _template.isWalkable() && _state == Constants.IOBJECT_STATE_FULL;
+			return _template.isWalkable();
 		 }
 	 }
 	

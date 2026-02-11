@@ -638,7 +638,7 @@ public class Personnage {
 				_storeItems.put(obj.getGuid(), price);
 			}
 		}
-		_PDVMAX = (_lvl-1)*5+Constants.getBasePdv(_classe)+getTotalStats().getEffect(Constants.STATS_ADD_VITA)+getTotalStats().getEffect(Constants.STATS_ADD_VIE);
+		_PDVMAX = (_lvl-1)*10+Constants.getBasePdv(_classe)+getTotalStats().getEffect(Constants.STATS_ADD_VITA)+getTotalStats().getEffect(Constants.STATS_ADD_VIE);
 		if (pdvPer > 100)
 			_PDV = (_PDVMAX * 100 / 100);
 		else
@@ -708,7 +708,7 @@ public class Personnage {
 			_items.put(obj.getGuid(), obj);
 		}
 		
-		_PDVMAX = (_lvl-1)*5+Constants.getBasePdv(_classe)+getTotalStats().getEffect(Constants.STATS_ADD_VITA)+getTotalStats().getEffect(Constants.STATS_ADD_VIE);
+		_PDVMAX = (_lvl-1)*10+Constants.getBasePdv(_classe)+getTotalStats().getEffect(Constants.STATS_ADD_VITA)+getTotalStats().getEffect(Constants.STATS_ADD_VIE);
 		this._PDV = (_PDVMAX*pdvPer)/100;
 		_sitTimer = new Timer(2000,new ActionListener()
 		{
@@ -738,7 +738,7 @@ public class Personnage {
 		if(_fight != null)return;
 		//D�j� Full PDV
 		if(_PDV == _PDVMAX)return;
-		_PDV += 1;
+		_PDV += 10;
 	}
 	
 	public static Personnage CREATE_PERSONNAGE(String name, int sexe, int classe, int color1, int color2, int color3,Compte compte)
@@ -1631,6 +1631,8 @@ public class Personnage {
 				}
 			}
 		}
+		// Double equipment+set stats (x2 server setting)
+		stats = Stats.cumulStat(stats, stats);
 		if(_onMount && _mount != null)
 		{
 			stats = Stats.cumulStat(stats, _mount.get_stats());
@@ -2091,7 +2093,7 @@ public class Personnage {
 	public void refreshStats()
 	{
 		double actPdvPer = (100*(double)_PDV)/(double)_PDVMAX;
-		_PDVMAX = (_lvl-1)*5+Constants.getBasePdv(_classe)+getTotalStats().getEffect(Constants.STATS_ADD_VITA)+getTotalStats().getEffect(Constants.STATS_ADD_VIE);
+		_PDVMAX = (_lvl-1)*10+Constants.getBasePdv(_classe)+getTotalStats().getEffect(Constants.STATS_ADD_VITA)+getTotalStats().getEffect(Constants.STATS_ADD_VIE);
 		_PDV = (int) Math.round(_PDVMAX*actPdvPer/100);
 	}
 
@@ -2099,9 +2101,9 @@ public class Personnage {
 	{
 		if(_lvl == World.getExpLevelSize())return;
 		_lvl++;
-		_capital+=10;
+		_capital+=15;
 		_spellPts += 2;
-		_PDVMAX += 5;
+		_PDVMAX += 10;
 		_PDV = _PDVMAX;
 		if(_lvl == 100)
 			_baseStats.addOneStat(Constants.STATS_ADD_PA, 1);

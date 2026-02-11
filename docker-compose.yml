@@ -16,6 +16,8 @@ services:
       - "./CyonEmu 2.9/Emulateur/CyonDBFULL.sql:/docker-entrypoint-initdb.d/01-init.sql:ro"
       - "./z-drops-override.sql:/docker-entrypoint-initdb.d/02-drops-override.sql:ro"
       - "./z-dungeon-fixes.sql:/docker-entrypoint-initdb.d/03-dungeon-fixes.sql:ro"
+      - "./z-xp-curve.sql:/docker-entrypoint-initdb.d/04-xp-curve.sql:ro"
+      - "./z-vip-all.sql:/docker-entrypoint-initdb.d/05-vip-all.sql:ro"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pcyonemu"]
       interval: 5s

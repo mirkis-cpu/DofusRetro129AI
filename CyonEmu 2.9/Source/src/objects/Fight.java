@@ -947,9 +947,9 @@ public class Fight
 			if(_type == 2)
 				return getTotalStats().getEffect(Constants.STATS_ADD_PA) + _mob.getPA();
 			if(_type == 5)
-				return getTotalStats().getEffect(Constants.STATS_ADD_PM) + 6;
+				return getTotalStats().getEffect(Constants.STATS_ADD_PA) + 6;
 			if(_type == 7)
-				return getTotalStats().getEffect(Constants.STATS_ADD_PM) + 6;
+				return getTotalStats().getEffect(Constants.STATS_ADD_PA) + 6;
 			if(_type == 10)
 				return getTotalStats().getEffect(Constants.STATS_ADD_PA);
 			
@@ -3616,7 +3616,7 @@ public class Fight
 	        			ObjTemplate OT = World.getObjTemplate(D.get_itemID());
 	        			if(OT == null)continue;
 	        			//on ajoute a la liste
-	        			itemWon.put(OT.getID(),(itemWon.get(OT.getID())==null?0:itemWon.get(OT.getID()))+1);
+	        			itemWon.put(OT.getID(),(itemWon.get(OT.getID())==null?0:itemWon.get(OT.getID()))+Formulas.getRandomValue(2,5));
 	        			
 	        			D.setMax(D.get_max()-1);
 	        			if(D.get_max() == 0)possibleDrops.remove(D);
@@ -3869,7 +3869,7 @@ public class Fight
     				ObjTemplate OT = World.getObjTemplate(D.get_itemID());
     				if(OT == null)continue;
     				//on ajoute a la liste
-    				itemWon.put(OT.getID(),(itemWon.get(OT.getID())==null?0:itemWon.get(OT.getID()))+1);
+    				itemWon.put(OT.getID(),(itemWon.get(OT.getID())==null?0:itemWon.get(OT.getID()))+Formulas.getRandomValue(2,5));
     				
     				D.setMax(D.get_max()-1);
     				if(D.get_max() == 0)possibleDrops.remove(D);
@@ -4080,7 +4080,7 @@ public class Fight
 				{
 					if(F.getPDV() <= 0)
 					{
-						player.set_PDV(1);
+						player.set_PDV(player.get_PDVMAX());
 					}else
 					{
 						player.set_PDV(F.getPDV());	
@@ -4166,7 +4166,7 @@ public class Fight
 						Thread.sleep(1000);
 					}catch(Exception E){};
 					/**Energie**/
-					int EnergyLoos = Formulas.getLoosEnergy(F.get_lvl(), _type==1, _type==5);
+					int EnergyLoos = 0; //Formulas.getLoosEnergy(F.get_lvl(), _type==1, _type==5);
 					int Energy = player.get_energy() - EnergyLoos;
 					if(Energy < 0) Energy = 0;
 					player.set_energy(Energy);
@@ -4176,7 +4176,7 @@ public class Fight
 					}else
 					{
 						player.warpToSavePos();
-						player.set_PDV(1);
+						player.set_PDV(player.get_PDVMAX());
 					}
 					if(player.isOnline())
 						SocketManager.GAME_SEND_Im_PACKET(player, "034;"+EnergyLoos);

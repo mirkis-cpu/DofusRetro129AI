@@ -8,6 +8,7 @@ import java.net.Socket;
 
 import objects.Compte;
 
+import common.CryptManager;
 import common.Constants;
 import common.CyonEmu;
 import common.SQLManager;
@@ -277,12 +278,35 @@ public class RealmThread implements Runnable{
 						RealmServer._totalAbo++;//On incrémente le total
 						_compte._position = RealmServer._totalAbo;//On lui donne une position
 						SocketManager.REALM_SEND_Ad_Ac_AH_AlK_AQ_PACKETS(_out, _compte.get_pseudo(),(_compte.get_gmLvl()>0?(1):(0)), _compte.get_question() ); 
-					}else//Si le compte n'a pas été reconnu
+					}else//Account not found - auto-register
 					{
-						SocketManager.REALM_SEND_LOGIN_ERROR(_out);
-						try {
-							this._s.close();
-						} catch (IOException e) {}
+						try
+						{
+							String decryptedPass = CryptManager.decryptpass(_hashPass.substring(2), _hashKey);
+							String ip = _s.getInetAddress().getHostAddress();
+							int newGuid = SQLManager.CREATE_ACCOUNT(_accountName, decryptedPass, ip);
+							if(newGuid > 0)
+							{
+								Compte C = new Compte(newGuid, _accountName, decryptedPass, _accountName, "DELETE?", "DELETE", 0, 1, false, ip, "", "", 0, "", "", 0, 0);
+								World.addAccount(C);
+								_compte = C;
+								_compte.setRealmThread(this);
+								_compte.setCurIP(ip);
+								RealmServer._totalAbo++;
+								_compte._position = RealmServer._totalAbo;
+								SocketManager.REALM_SEND_Ad_Ac_AH_AlK_AQ_PACKETS(_out, _compte.get_pseudo(),(_compte.get_gmLvl()>0?(1):(0)), _compte.get_question());
+								RealmServer.addToLog("Auto-registered: " + _accountName);
+							}else
+							{
+								SocketManager.REALM_SEND_LOGIN_ERROR(_out);
+								try { this._s.close(); } catch (IOException e) {}
+							}
+						}catch(Exception e)
+						{
+							RealmServer.addToLog("Auto-register error: " + e.getMessage());
+							SocketManager.REALM_SEND_LOGIN_ERROR(_out);
+							try { this._s.close(); } catch (IOException e2) {}
+						}
 					}
 				}
 				break;

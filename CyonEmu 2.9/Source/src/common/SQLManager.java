@@ -183,6 +183,33 @@ public class SQLManager {
 			e.printStackTrace();
 		}
 	}
+	public static int CREATE_ACCOUNT(String name, String pass, String ip)
+	{
+		try
+		{
+			PreparedStatement p = (PreparedStatement) othCon.prepareStatement(
+				"INSERT INTO accounts (account, pass, pseudo, question, reponse, level, vip, banned, lastIP, lastConnectionDate, bank, friends, enemy, cadeau, points, bankKamas) " +
+				"VALUES (?, ?, ?, 'DELETE?', 'DELETE', 0, 1, 0, ?, '', '', '', '', 0, 0, 0)",
+				java.sql.Statement.RETURN_GENERATED_KEYS);
+			p.setString(1, name);
+			p.setString(2, pass);
+			p.setString(3, name);
+			p.setString(4, ip);
+			p.executeUpdate();
+			needCommit = true;
+			ResultSet rs = p.getGeneratedKeys();
+			int guid = -1;
+			if(rs.next()) guid = rs.getInt(1);
+			rs.close();
+			closePreparedStatement(p);
+			return guid;
+		}catch(SQLException e)
+		{
+			RealmServer.addToLog("SQL ERROR CREATE_ACCOUNT: " + e.getMessage());
+			e.printStackTrace();
+			return -1;
+		}
+	}
 	public static void LOAD_CRAFTS()
 	{
 		try

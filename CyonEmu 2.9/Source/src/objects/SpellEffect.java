@@ -527,6 +527,7 @@ public class SpellEffect
 				break;
 				case 144:// - Dommages (pas bost�)
 					applyEffect_144(fight, cibles);
+				break;
 				case 145://Malus Dommage
 					applyEffect_145(fight,cibles);
 				break;
@@ -1753,7 +1754,7 @@ public class SpellEffect
 				SocketManager.GAME_SEND_GA_PACKET_TO_FIGHT(fight, 7, effectID, caster.getGUID()+"", caster.getGUID()+","+val+","+turns);	
 		}
 		
-		private void applyEffect_78(ArrayList<Fighter> cibles, Fight fight)//Bonus PA
+		private void applyEffect_78(ArrayList<Fighter> cibles, Fight fight)//Bonus PM
 		{
 			int val = Formulas.getRandomJet(jet);
 			if(val == -1)
@@ -1764,6 +1765,8 @@ public class SpellEffect
 			for(Fighter target : cibles)
 			{
 				target.addBuff(effectID, val, turns, 1, false, spell, args, caster);
+				//Gain de PM pendant le tour de jeu
+				if(target.canPlay() && target == caster) target.setCurPM(fight, target.getPM()+val);
 				SocketManager.GAME_SEND_GA_PACKET_TO_FIGHT(fight, 7, effectID, caster.getGUID()+"", target.getGUID()+","+val+","+turns);
 			}		
 		}
@@ -2439,7 +2442,7 @@ public class SpellEffect
 			int num = 0;
 			for(Fighter target : cibles)
 			{
-				int val = Formulas.getPointsLost('m', value, caster, target);
+				int val = Formulas.getPointsLost('a', value, caster, target);
 				if(val < value)
 					SocketManager.GAME_SEND_GA_PACKET_TO_FIGHT(fight, 7, 308, caster.getGUID()+"", target.getGUID()+","+(value-val));
 

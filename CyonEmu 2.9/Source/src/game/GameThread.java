@@ -2050,7 +2050,7 @@ public class GameThread implements Runnable
 				return;
 			}
 			//On ne peut �quiper 2 items de panoplies identiques, ou 2 Dofus identiques
-			if(pos != Constants.ITEM_POS_NO_EQUIPED && (obj.getTemplate().getPanopID() != -1 || obj.getTemplate().getType() == Constants.ITEM_TYPE_DOFUS )&& _perso.hasEquiped(obj.getTemplate().getID()))
+			if(pos != Constants.ITEM_POS_NO_EQUIPED && (obj.getTemplate().getPanopID() != -1 || obj.getTemplate().getType() == Constants.ITEM_TYPE_DOFUS ) && obj.getTemplate().getType() != Constants.ITEM_TYPE_ANNEAU && _perso.hasEquiped(obj.getTemplate().getID()))
 				return;
 			// FIN DES VERIFS
 			

@@ -129,7 +129,7 @@ public class Formulas {
 				//on ajoute les dom Physique
 				domC += caster.getTotalStats().getEffect(142);
 				//Ajout de la resist Physique
-				resfT = target.getTotalStats().getEffect(184);
+				resfT += target.getTotalStats().getEffect(184);
 			break;
 			case Constants.ELEMENT_TERRE://force
 				statC = caster.getTotalStats().getEffect(Constants.STATS_ADD_FORC);
@@ -143,7 +143,7 @@ public class Formulas {
 				//on ajout les dom Physique
 				domC += caster.getTotalStats().getEffect(142);
 				//Ajout de la resist Physique
-				resfT = target.getTotalStats().getEffect(184);
+				resfT += target.getTotalStats().getEffect(184);
 			break;
 			case Constants.ELEMENT_EAU://chance
 				statC = caster.getTotalStats().getEffect(Constants.STATS_ADD_CHAN);
@@ -155,7 +155,7 @@ public class Formulas {
 					resfT += target.getTotalStats().getEffect(Constants.STATS_ADD_R_PVP_EAU);
 				}
 				//Ajout de la resist Magique
-				resfT = target.getTotalStats().getEffect(183);
+				resfT += target.getTotalStats().getEffect(183);
 			break;
 			case Constants.ELEMENT_FEU://intell
 				statC = caster.getTotalStats().getEffect(Constants.STATS_ADD_INTE);
@@ -167,7 +167,7 @@ public class Formulas {
 					resfT += target.getTotalStats().getEffect(Constants.STATS_ADD_R_PVP_FEU);
 				}
 				//Ajout de la resist Magique
-				resfT = target.getTotalStats().getEffect(183);
+				resfT += target.getTotalStats().getEffect(183);
 			break;
 			case Constants.ELEMENT_AIR://agilit�
 				statC = caster.getTotalStats().getEffect(Constants.STATS_ADD_AGIL);
@@ -179,7 +179,7 @@ public class Formulas {
 					resfT += target.getTotalStats().getEffect(Constants.STATS_ADD_R_PVP_AIR);
 				}
 				//Ajout de la resist Magique
-				resfT = target.getTotalStats().getEffect(183);
+				resfT += target.getTotalStats().getEffect(183);
 			break;
 		}
 		//On bride la resistance a 100% si c'est un joueur
@@ -225,7 +225,7 @@ public class Formulas {
 				a = (((100+i)/100)*(j/100));
 			}
 			
-			num = a*(jet * ((100 + statC + perdomC + (multiplier*100)) / 100 ))+ domC;//d�gats bruts
+			num = 2*(a*(jet * ((100 + statC + perdomC + (multiplier*100)) / 100 ))+ domC);//d�gats bruts
 			
 		//Poisons
 		if(spellid != -1)

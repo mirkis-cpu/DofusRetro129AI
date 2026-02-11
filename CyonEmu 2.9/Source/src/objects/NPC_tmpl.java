@@ -115,10 +115,10 @@ public class NPC_tmpl {
 			sock.append(_orientation).append(";");
 			sock.append("0").append(";");
 			sock.append(_guid).append(";");
-			// Custom shop NPCs (id>1234) → send known merchant template ID to client
+			// Custom shop NPCs (id>1234) → use Cape Merchant (1158) client ID for Buy/Sell
 			int clientId = _template.get_id();
 			if(clientId > 1234 && !_template._ventes.isEmpty())
-				clientId = 812;
+				clientId = 1158;
 			sock.append(clientId).append(";");
 			sock.append("-4").append(";");//type = NPC
 			
