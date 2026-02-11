@@ -1,0 +1,25 @@
+job id:
+1 -  basic nic
+2 - lumberjack - 454
+11- swordsmith -  494
+13 - bow carver - 500
+14 - hammer smith
+15 - shoemaker - 579
+16 - jeweller - 491
+17 - dagger smith
+18 - staff carver
+19 - wand carver
+20 - shovel maker
+24 - miner - 497
+25 - baker
+26 - alchemyst - 1473
+27 - tailor
+28 - farmer
+31 - axesmith
+33 - nic
+36 - fisherman
+41 - hunter
+56 - butcher
+58 - fishmonger
+60 - shieldsmith
+62 - shoemagus

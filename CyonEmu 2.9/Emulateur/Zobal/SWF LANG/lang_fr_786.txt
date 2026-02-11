@@ -1,0 +1,10 @@
+Ctrl+F et tapez = A_GIVE_U_RIGHTS
+
+Rempalacé tout la ligne en mettez A_GIVE_U_RIGHTS = "%1";
+
+
+
+
+
+
+                                                       cyonEmu

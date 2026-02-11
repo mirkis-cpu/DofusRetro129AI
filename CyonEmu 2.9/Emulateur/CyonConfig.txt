@@ -1,0 +1,107 @@
+# Fichier de configuration du CyonEmu remake 2.9.
+
+
+# Configuration du serveur du jeu.
+GAME_PORT = 5555
+REALM_PORT = 4444
+HOST_IP = 25.57.218.97
+SAVE_TIME = 30
+PLAYER_LIMIT = 200
+PLAYER_IP = 4
+ALLOW_MULTI_ACCOUNT = true
+USE_IP = false
+LOAD_ACTION_DELAY = 15
+
+SERVER_ID = 1
+# 1 2 4 6 7 9 10 13 14 15 16 17 20 21 22 23 27 29 30 31 38 7001 9001
+
+
+# Configuration du console DOS.
+SHOW_RECV = true
+SEND_POLICY = true
+LOCALIP_LOOPBACK = true
+DEBUG = false
+
+
+# Rates
+XP_PVP = 20
+XP_METIER = 5
+XP_PVM = 5
+DROP = 20
+KAMAS = 7
+HONOR = 20
+PORC_FM = 5
+
+
+# Configuration de la base de donnée.
+DB_HOST = localhost
+DB_USER = root
+DB_PASS = 
+STATIC_DB_NAME = cyon_2.9	
+OTHER_DB_NAME = cyon_2.9
+
+
+# Configuration du GamePlay.
+USE_MOBS = true
+START_LEVEL = 1
+START_KAMAS = 100000
+ZAAP = true
+LVL_PVP = 25
+ALLOW_MULE_PVP = true
+AURA_SYSTEM = false
+MAX_IDLE_TIME = 30
+NOT_IN_HDV = 4820
+MOTD =<b></b> Bienvenue sur <b>nomduserveur</b> ! 
+MOTD_COLOR = 0d8b0d
+START_ITEMS =
+MAP_NO_PRISMES = 935,528,9454,951,1242,164,1158,8037,8437,8088,8125,8163,10643,11170,1841,844,11210,4263,3022,6855,6137,3250,4739,5295,8785,7411,6954,2191,10297,10349,10304,10317
+
+
+# Arenes.
+
+ARENA_MAP = 10134,10132,10131,10133,10137,10135,10136,10138
+ARENA_TIMER = 30000
+
+
+# Limit PA & PM.
+MAXPA = 50
+MAXPM = 50
+
+
+# Reboot automatique( En millisecondes)
+ACTIV_REBOOT = False
+REBOOT_TIME = 34000000
+
+
+# Caractéristiques 2.0
+ACTIV_CARACT_2 = true
+
+
+# Systéme pub
+ACTIV_PUB = true
+PUB1 = <b>Information :</b> Allez votez et gagner des points.
+PUB2 = ICI LES INFO
+PUB3 = ICI LES INFO
+
+
+# Maps
+START_MAP = 164
+START_CELL = 298
+
+SHOP_MAP = 10111
+SHOP_CELL = 326
+
+PVM_MAP = 13029
+PVM_CELL = 454
+
+PVP_MAP = 952
+PVP_CELL = 367
+
+# Dragodinde
+MAX_LEVEL_MONTURE = 100
+FEED_MOUNT = 41
+
+# Experience en défie
+ACTIVER_XP_DEFI = false
+
+

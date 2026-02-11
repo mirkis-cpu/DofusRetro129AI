@@ -1,0 +1,81 @@
+Lizenzbestimmungen für die Nutzung des DOFUS-Installationsprogramms
+Stand: 12/02/2007	
+
+
+DIESE SOFTWARE SOWIE SÄMTLICHE BEGLEITDATEIEN WERDEN DEM NUTZER „WIE BESEHEN“ UNTER AUSSSCHLUSS JEGLICHER GEWÄHRLEISTUNG ZUR VERFÜGUNG GESTELLT.
+
+Auf der Grundlage dieses Lizenzvertrags ist der Nutzer (Lizenznehmer, Spieler) zur Installation der DOFUS-Software (des Spiels sowie der mit diesem verbundenen Dienste) mittels des DOFUS-Installationsprogramms (das Programm) berechtigt. Eigentümer des Spiels ist Ankama Games (die Gesellschaft, der Eigentümer). Die Bestimmungen des vorliegenden Vertrags ergänzen die für DOFUS geltenden, unter http://www.dofus.com veröffentlichten Nutzungsbestimmungen, welche vor der Nutzung der DOFUS-Software und vor der Herstellung der Verbindung zum Server vollumfänglich vom Nutzer anzuerkennen sind.
+
+Mit der Übertragung, Nutzung und Installation des DOFUS-Installationsprogramms stimmt der Lizenznehmer den Bestimmungen des vorliegenden Vertrags zu. Andernfalls ist der Lizenznehmer verpflichtet, sämtliche Dateien unverzüglich zu löschen. 
+
+Das Programm unterliegt den internationalen Gesetzen und Abkommen zum Schutze des Urheberrechts und den Rechten des geistigen Eigentums. Ankama Games gewährt dem Nutzer eine Lizenz zur Verwendung des Programms, ohne dass hiervon die Eigentumsrechte von Ankama an der bereit gestellten Software berührt werden. Vorbehaltlich ausdrücklicher anders lautender Vereinbarungen liegen und verbleiben sämtliche Rechte an der Software bei Ankama Games.
+
+Voraussetzung für die Anerkennung des vorliegenden Lizenzvertrags ist das Erreichen der Volljährigkeit. Volljährig ist, wer das Alter von 18 Jahren erreicht hat (dies gilt für Frankreich), oder gemäß den Bestimmungen seines Heimatlandes als volljährig gilt. Ferner muss der Lizenznehmer vollumfänglich geschäftsfähig sein. Andernfalls tritt der gesetzliche Vertreter in die Rechtsnachfolge als Lizenznehmer ein und haftet dementsprechend für die Verwendung der Software. 
+
+
+1. SOFTWARE-LIZENZ
+
+Die vorliegende Lizenz berechtigt den Nutzer
+- zur Installation des Programms auf allen in seinem Eigentum befindlichen Computern oder allen Computern, für welche er über die erforderlichen Rechte zur Installation von Software-Anwendungen verfügt, 
+- zur Verwendung des Programms im Rahmen der vorliegenden Vertragsbestimmungen und der für DOFUS geltenden, unter http://www.dofus.com veröffentlichten Nutzungsbestimmungen, 
+- zur Speicherung der bereitgestellten Dateien. 
+
+Vorbehaltlich der ausdrücklichen Genehmigung durch den Eigentümer der Software und ihrer Dateien ist es dem Lizenznehmer untersagt, die Software und ihre Dateien oder Teile der Software und ihrer Dateien an Dritte zu verkaufen und/oder zu vertreiben, selbst wenn ein solcher Vertrieb kostenlos erfolgt.
+
+Im Falle der Nichtbeachtung einer oder aller Bestimmungen des vorliegenden Vertrags behält sich Ankama Games das Recht auf einseitige Vertragsbeendigung vor. 
+
+
+
+2. WEITERE NUTZUNGSBESCHRÄNKUNGEN
+
+Dekompilierung: Der Lizenznehmer darf die Software oder Teile der Software nicht  dekompilieren, disassemblieren oder auf andere technische Weise bearbeiten. 
+
+Vollständigkeit der Software: Das DOFUS-Installationsprogramm wird als vollständige Software zur Verfügung gestellt, deren einzelne Dateien untrennbar miteinander verbunden sind und den Bedingungen dieses Lizenzvertrags unterliegen. 
+
+Weiterentwicklung: Der Lizenznehmer ist nicht berechtigt, das vorliegende Programm zur Entwicklung einer anderen Software und/oder Programms zu nutzen. Diese Nutzungsbeschränkung kann einzig mittels ausdrücklicher Zustimmung seitens Ankama Games aufgehoben werden. Ohne eine solche ausdrückliche Zustimmung gilt die vorliegende Bestimmung für alle juristischen und/oder natürlichen Personen.
+
+
+3. SOFTWAREAKTUALISIERUNGEN
+
+Das vorliegende Installationsprogramm kann ein System zur Aktualisierung des auf dem Computer des Lizenznehmers installierten Programms enthalten, welches von manchen Softwareanwendungen als Spyware erkannt wird. Ankama Games haftet nicht für den Funktionsausfall dieses Aktualisierungssystems, sofern eine derartige Erkennungssoftware auf dem PC des Lizenznehmers eingerichtet ist.
+
+Das Aktualisierungssystem erfordert eine Internetverbindung. Ankama Games haftet nicht für Schäden, die sich aus der Nutzung einer Internetverbindung oder der Installation bösartiger Software auf dem Computer des Lizenznehmers ergeben. 
+
+
+4. EIGENTUMSRECHTE
+
+Das zur Verfügung gestellte DOFUS-Installationsprogramm sowie das DOFUS-Programm basieren auf der Verwendung von Softwarequellen, deren Eigentumsrechte nicht bei Ankama liegen, insbesondere, jedoch nicht ausschließlich Flash Run-Time von Macromedia, Inc.
+
+Mit der Nutzung des Installationsprogramms und des DOFUS-Programms stimmt der Lizenznehmer zu, die Inhaber der Eigentumsrechte an den jeweiligen Softwarequellen von allen Haftungs-, Verlust-, Gewährleistungs- oder Schadensersatzansprüchen und -klagen freizustellen.
+
+
+5. GEWÄHRLEISTUNG
+
+Unter dem Vorbehalt, dass der Lizenznehmer das DOFUS-Installationprogramm von der Seite http://www.dofus.com herunterlädt, gewährleistet Ankama Games für den Zeitraum von 30 Tage ab dem Download der Dateien, dass das DOFUS-Installationprogramm wie in der auf der DOFUS-Webseite (http://www.dofus.com) beschrieben funktioniert.
+Im Falle einer endgültigen Einstellung der DOFUS-Leistungen erlischt diese Gewährleistung mit sofortiger Wirkung. Vorbehaltlich anders lautender gesetzlicher Bestimmungen ist diese Gewährleistungspflicht unbeschränkt rechtsgültig. Für den Fall der Anwendbarkeit anders lautender Gesetze besteht Gewährleistung für die gesetzlich festgelegte Mindestdauer. 
+
+
+6. HAFTUNGSAUSSCHLUSS
+
+Nach Maßgabe der gesetzlich anwendbaren Bestimmungen übernehmen Ankama Games und ihre Partner keinerlei Haftung für Schäden, die sich in Folge der Nutzung des DOFUS-Installationsprogramms ergeben.
+
+
+7. RECHTSBEHELF
+
+Im Rahmen der vorliegenden Bestimmungen kann der Lizenznehmer Beschwerde gegen den Vertrieb des DOFUS-Installationsprogramms einlegen. Entsprechende Schriftsätze sind an Ankama Games, 75 boulevard d'Armentières, 59100 Roubaix, Frankreich zu richten. Die Gesellschaft wird die Zulässigkeit dieses Rechtsbehelfs prüfen und ihm entweder stattgeben oder ihn ablehnen. In jedem Fall weist die Gesellschaft darauf hin, dass bei der Anwendung von Rechtsmitteln zwischen dem DOFUS-Installationsprogramm und dem DOFUS-Programmm zu unterscheiden ist. Rechtsbehelfe gegen den Vertrieb des DOFUS-Programms unterliegen den unter http://www.dofus.com veröffentlichten Bestimmungen.
+
+
+8. VERTRAGSÄNDERUNGEN
+
+Für die Änderung der Bestimmungen des vorliegenden Vertrags bedarf es der  Vereinbarung zwischen beiden Vertragsparteien. Dessen ungeachtet ist Ankama Games berechtigt, die vorliegenden Bestimmungen zu korrigieren und zu konkretisieren, sofern hierdurch ihr ursprünglicher Geltungsumfang nicht berührt wird. 
+
+
+9. ÜBERTRAGUNG VON RECHTEN
+
+Die Bestimmungen des vorliegenden Lizenzvertrags zwischen Ankama Games und dem Lizenznehmer treten mit dem Datum ihrer Anerkennung in Kraft. Die im Rahmen dieser Bestimmungen gewährten Rechte sind nicht an Dritte übertragbar. 
+
+
+10. GELTENDES RECHT UND GERICHTSSTAND
+
+Ankama ist als Gesellschaft französischen Rechts unter der Nummer B 492 360 730 im Handelsregister von Roubaix-Tourcoing eingetragen. Sitz der Gesellschaft ist 75, boulevard d'Armentières, 59100 Roubaix, Frankreich.
+

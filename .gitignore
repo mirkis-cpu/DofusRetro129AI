@@ -1,0 +1,32 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / Tools
+.claude/
+.serena/
+__pycache__/
+
+# Build artifacts
+CyonEmu 2.9/Source/out/
+CyonEmu 2.9/Emulateur/CyonEmu-fixed.jar
+CyonEmu 2.9/Source/CyonEmu-fixed.jar
+
+# Backups
+*.bak
+
+# Docker volumes
+mysql-data/
+
+# Logs
+*.log
+
+# Windows executables (not needed for server)
+dofus/_upl.exe
+dofus/_upl.exe.crc
+dofus/UpLauncher.exe
+dofus/uninstall.exe
+dofus/Dofus.exe
+dofus/dofus.dll
+dofus/uplauncher.xml
+dofus/uplauncher.log

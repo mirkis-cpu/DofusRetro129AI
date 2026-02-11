@@ -1,0 +1,64 @@
+´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´CyoneEmu Remake v.0.2.9``````````````````````````````````
+
+
+--------------------------------------------------------------------------------------------
+
+                                   Introduction:
+                                   -------------
+
+- Avant rien, en achetant cet émulateur, vous acceptez toutes mes térmes et conditions d'usage.
+Desquels il est remarquer la prohibition du partage l'émulateur, au cas où il est partagé vous perdrez le droit d'actualisation, et je aurai le droit de attaquer et détruire les serveur qui utilisent cet émulateur sans le avoir acheté. 
+Merci pour me respecter et de respecter le travail et les heures que j'ai dépensées en devlopement de l'émulateur.
+Si vous avez un question en lisant ce explications, contacte-moi.
+
+
+                                   Boutique In Game:
+                                   -----------------
+
+- Le boutique IG utilise le points comme moyen de payment au lieu des KAMAS, il est trop securisé. Pour activer la vente de un item par points, dans item_template, column points vous mettez le nombre de points contre le item.
+Le points son placé dans le compte, reste mettre dans vos CMS les scripts pour donne des points quand vous achete quelque chose.
+
+
+                                    Action de Zobal:
+                                   -----------------
+
+- L'action pour zobal ce 31. Pour mettre cette action sur un objet allé sur use_item_actions dans la DB est mettez le ID de item, dans type vous mettez 31 et dans args 13.
+
+                                      
+                                    Action changé du sexe:
+                                   ------------------------
+
+- L'action pour change le sexe ce 32. Pour mettre cette action sur un objet allé sur use_item_actions dans la DB est mettez le ID de item, dans type vous mettez 32 et rien dans args.
+
+                                    Action donné un title:
+                                   ------------------------
+
+- L'action pour donné un title ce 170. Pour mettre cette action sur un objet allé sur use_item_actions dans la DB est mettez le ID de item, dans type vous mettez 170 et dans le args vous mettez le id tu title.
+
+                                  SERVER_ID & START_ITEMS:
+                                 --------------------------
+
+Dans SERVER_ID vous pouvez choisir le serveur que vous voulez, le skin, nom etc en utilisant ses ID
+Dans START_ITEMS vous pouvez mettez des items depart, avec son quantité : IDitem:quantité
+Si vous voulez mettre plesuir items IDitem:quantité,IDitem:quantité
+
+¡¡Attention!! Ne laisse JAMAIS vidée START_ITEMS, si non il va deconnecté a la creation du personnage.
+                                  
+                                       MAP_NO_PRISMES
+                                     ------------------
+Maps où les joueurs ne pourront pas poser des prismes, les maps ajouté son de maps de villes et maps du zaap.
+
+                                  
+                                    MAX_LEVEL_MONTURE & FEED_MOUNT
+                                   --------------------------------
+MAX_LEVEL_MONTURE permet de changer les niveaux max qui peux arrivé un dragodinde, FEED_MOUNT le type d'objet pour nourrir un dragondinde,
+normalment laissé en 41(Poison).
+                           
+                                   Action maximizé le stat d'un item
+                                  -----------------------------------
+- L'action pour maximizé un item ce 33. Pour mettre cette action sur un objet allé sur use_item_actions dans la DB est mettez le ID de item, dans type vous mettez 33 et l'item pos args(A trouver dans Constants.java) et cela
+maximizerá l'item dans la pos indiqué.
+
+Si vous avez un doute, contacte-moi. 
+
+IamNothing.
