@@ -1717,11 +1717,11 @@ public class Personnage {
 			pods += SM.get_lvl()*500;
 			if(SM.get_lvl() == 100) pods += 1000;
 		}
-		return pods;
+		return pods * 2;
 	}
 
-	
-	
+
+
 	public int get_PDV() {
 		return _PDV;
 	}
