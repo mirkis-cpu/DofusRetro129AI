@@ -4024,6 +4024,8 @@ public class GameThread implements Runnable
 				String cmds = "Available commands:"
 					   + "\n<b>.info</b> - Show available commands"
 					   + "\n<b>.infos</b> - Show server information"
+					   + "\n<b>.goto X,Y</b> - Teleport to coordinates (e.g. .goto -4,16)"
+					   + "\n<b>.stats &lt;stat&gt; &lt;amount&gt;</b> - Boost stat (e.g. .stats vitality 100)"
 					   + "\n<b>.start</b> - Teleport to starting map"
 					   + "\n<b>.shop</b> - Teleport to shop map"
 					   + "\n<b>.pvm</b> - Teleport to PvM map"
@@ -4037,10 +4039,6 @@ public class GameThread implements Runnable
 					   + "\n<b>.koli</b> - Register for Kolizeum"
 					   + "\n<b>.infokoli</b> - Show Kolizeum info"
 					   + "\n<b>.points</b> - Show your shop points";
-				if(_compte.get_gmLvl() >= 1) {
-					cmds += "\n\n<b>GM Commands:</b>"
-					   + "\n<b>.goto mapID [cellID]</b> - Teleport to map";
-				}
 				if(_compte.get_vip() >= 1) {
 					cmds += "\n\n<b>VIP Commands:</b>"
 					   + "\n<b>.vie</b> - Full HP heal"
@@ -4767,36 +4765,77 @@ public class GameThread implements Runnable
 					return;
 			}else if(msg.length() > 4 && msg.substring(1, 5).equalsIgnoreCase("goto"))
 				{
-					if(_compte.get_gmLvl() < 1) {
-						SocketManager.GAME_SEND_MESSAGE(_perso, "You need GM level to use this command.", CyonEmu.CONFIG_MOTD_COLOR);
+					if(_perso.get_fight() != null) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Cannot teleport while in combat.", CyonEmu.CONFIG_MOTD_COLOR);
 						return;
 					}
-					if(_perso.get_fight() != null) return;
-					String[] args = msg.substring(1).split(" ");
-					if(args.length < 2) {
-						SocketManager.GAME_SEND_MESSAGE(_perso, "Usage: .goto mapID [cellID]", CyonEmu.CONFIG_MOTD_COLOR);
+					String[] args = msg.substring(1).split("[, ]+");
+					if(args.length < 3) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Usage: <b>.goto X,Y</b> (e.g. .goto -4,16)", CyonEmu.CONFIG_MOTD_COLOR);
 						return;
 					}
 					try {
-						short mapID = Short.parseShort(args[1]);
-						int cellID = 300;
-						if(args.length >= 3) cellID = Integer.parseInt(args[2]);
-						if(World.getCarte(mapID) == null) {
-							SocketManager.GAME_SEND_MESSAGE(_perso, "Map " + mapID + " not found.", CyonEmu.CONFIG_MOTD_COLOR);
+						int mapX = Integer.parseInt(args[1]);
+						int mapY = Integer.parseInt(args[2]);
+						Carte map = World.getCarteByPosAndCont(mapX, mapY, 0);
+						if(map == null) {
+							SocketManager.GAME_SEND_MESSAGE(_perso, "No map found at coordinates [" + mapX + "," + mapY + "].", CyonEmu.CONFIG_MOTD_COLOR);
 							return;
 						}
-						if(World.getCarte(mapID).getCase(cellID) == null) {
-							SocketManager.GAME_SEND_MESSAGE(_perso, "Cell " + cellID + " not found on map " + mapID + ".", CyonEmu.CONFIG_MOTD_COLOR);
-							return;
-						}
-						_perso.teleport(mapID, cellID);
-						SocketManager.GAME_SEND_MESSAGE(_perso, "Teleported to map " + mapID + " cell " + cellID + ".", CyonEmu.CONFIG_MOTD_COLOR);
+						_perso.teleport(map.get_id(), 311);
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Teleported to [" + mapX + "," + mapY + "].", CyonEmu.CONFIG_MOTD_COLOR);
 					} catch(NumberFormatException e) {
-						SocketManager.GAME_SEND_MESSAGE(_perso, "Usage: .goto mapID [cellID]", CyonEmu.CONFIG_MOTD_COLOR);
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Usage: <b>.goto X,Y</b> (e.g. .goto -4,16)", CyonEmu.CONFIG_MOTD_COLOR);
 					}
 					return;
+			}else if(msg.length() > 5 && msg.substring(1, 6).equalsIgnoreCase("stats"))
+				{
+					if(_perso.get_fight() != null) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Cannot boost stats while in combat.", CyonEmu.CONFIG_MOTD_COLOR);
+						return;
+					}
+					String[] args = msg.substring(1).split(" ");
+					if(args.length < 3) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Usage: <b>.stats &lt;stat&gt; &lt;amount&gt;</b>\nStats: vitality, wisdom, strength, intelligence, chance, agility\nExample: .stats vitality 100", CyonEmu.CONFIG_MOTD_COLOR);
+						return;
+					}
+					String statName = args[1].toLowerCase();
+					int amount;
+					try {
+						amount = Integer.parseInt(args[2]);
+					} catch(NumberFormatException e) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Amount must be a number.", CyonEmu.CONFIG_MOTD_COLOR);
+						return;
+					}
+					if(amount <= 0) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Amount must be positive.", CyonEmu.CONFIG_MOTD_COLOR);
+						return;
+					}
+					int statCode = -1;
+					switch(statName) {
+						case "vitality": case "vita": case "vit": statCode = 11; break;
+						case "wisdom": case "sage": case "wis": statCode = 12; break;
+						case "strength": case "force": case "str": statCode = 10; break;
+						case "intelligence": case "intel": case "int": statCode = 15; break;
+						case "chance": case "cha": statCode = 13; break;
+						case "agility": case "agil": case "agi": statCode = 14; break;
+					}
+					if(statCode == -1) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Unknown stat: <b>" + statName + "</b>\nAvailable: vitality, wisdom, strength, intelligence, chance, agility", CyonEmu.CONFIG_MOTD_COLOR);
+						return;
+					}
+					int capitalBefore = _perso.get_capital();
+					if(capitalBefore <= 0) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "You have no stat points available.", CyonEmu.CONFIG_MOTD_COLOR);
+						return;
+					}
+					_perso.boostStatFixedCount(statCode, amount);
+					int capitalAfter = _perso.get_capital();
+					int spent = capitalBefore - capitalAfter;
+					SocketManager.GAME_SEND_MESSAGE(_perso, "Boosted <b>" + statName + "</b> by " + spent + " point(s). Remaining capital: " + capitalAfter, CyonEmu.CONFIG_MOTD_COLOR);
+					return;
 			}else
-				SocketManager.GAME_SEND_MESSAGE(_perso,"La <b>commande</b> que tu as \u00e9crit est incorrect. Tape <b>.commandes</b> pour voir tous les commandes disponnibles!", CyonEmu.CONFIG_MOTD_COLOR);
+				SocketManager.GAME_SEND_MESSAGE(_perso,"La <b>commande</b> que tu as \u00e9crit est incorrect. Tape <b>.info</b> pour voir tous les commandes disponnibles!", CyonEmu.CONFIG_MOTD_COLOR);
 			        return;
 			}
 			if(_perso.get_fight() == null)

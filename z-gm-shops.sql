@@ -72,39 +72,39 @@ INSERT INTO npc_template (id, bonusValue, gfxID, scaleX, scaleY, sex, color1, co
 -- 2026=Ore(47), 2027=Alloy(48), 2028=Plank(49), 2029=Gem(50)
 -- 2030=Fish Raw(62), 2031=Fish Cooked(63), 2032=Preserved(64)
 -- =========================================
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=2) WHERE id=2000;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=11) WHERE id=2001;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=13) WHERE id=2002;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=14) WHERE id=2003;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=15) WHERE id=2004;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=28) WHERE id=2005;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=36) WHERE id=2006;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=16) WHERE id=2007;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=17) WHERE id=2008;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=18) WHERE id=2009;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=19) WHERE id=2010;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=20) WHERE id=2011;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=25) WHERE id=2012;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=26) WHERE id=2013;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=24) WHERE id=2014;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=27) WHERE id=2015;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=31) WHERE id=2016;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=41) WHERE id=2017;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=56) WHERE id=2018;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=58) WHERE id=2019;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=60) WHERE id=2020;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=65) WHERE id=2021;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=43) WHERE id=2022;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=44) WHERE id=2023;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=45) WHERE id=2024;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=46) WHERE id=2025;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=47) WHERE id=2026;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=48) WHERE id=2027;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=49) WHERE id=2028;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=50) WHERE id=2029;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=62) WHERE id=2030;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=63) WHERE id=2031;
-UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY id) FROM item_template WHERE type=64) WHERE id=2032;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=2) WHERE id=2000;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=11) WHERE id=2001;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=13) WHERE id=2002;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=14) WHERE id=2003;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=15) WHERE id=2004;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=28) WHERE id=2005;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=36) WHERE id=2006;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=16) WHERE id=2007;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=17) WHERE id=2008;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=18) WHERE id=2009;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=19) WHERE id=2010;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=20) WHERE id=2011;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=25) WHERE id=2012;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=26) WHERE id=2013;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=24) WHERE id=2014;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=27) WHERE id=2015;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=31) WHERE id=2016;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=41) WHERE id=2017;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=56) WHERE id=2018;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=58) WHERE id=2019;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=60) WHERE id=2020;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=65) WHERE id=2021;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=43) WHERE id=2022;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=44) WHERE id=2023;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=45) WHERE id=2024;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=46) WHERE id=2025;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=47) WHERE id=2026;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=48) WHERE id=2027;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=49) WHERE id=2028;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=50) WHERE id=2029;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=62) WHERE id=2030;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=63) WHERE id=2031;
+UPDATE npc_template SET ventes=(SELECT GROUP_CONCAT(id ORDER BY level, id) FROM item_template WHERE type=64) WHERE id=2032;
 
 -- =========================================
 -- NPC Spawns on map 7443 (6,-19 Astrub - GM Shop from MOTD)

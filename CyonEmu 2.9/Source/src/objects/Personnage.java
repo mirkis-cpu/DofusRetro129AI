@@ -1306,10 +1306,12 @@ public class Personnage {
 		{
 			String color = CyonEmu.CONFIG_MOTD_COLOR;
 			if(color.equals(""))color = "000000";//Noir
-			
+
 			SocketManager.GAME_SEND_MESSAGE(this, CyonEmu.CONFIG_MOTD, color);
 		}
-		
+
+		SocketManager.GAME_SEND_MESSAGE(this, "Type <b>.info</b> to see all commands. Quick: <b>.goto X,Y</b> | <b>.stats vitality 100</b> | <b>.save</b>", "046380");
+
 		if(_energy > 0 && _energy < 2000)
 		{
 			SocketManager.send(this, "M111|" + _energy);
