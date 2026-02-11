@@ -69,14 +69,22 @@ if [ "$LOCAL_SIZE" != "$REMOTE_SIZE" ]; then
 fi
 echo "Verification OK - JAR sizes match"
 
-echo "=== 6. Restart server ==="
+echo "=== 6. Apply SQL overrides ==="
+# Execute all z-*.sql files against the running DB (sorted by name)
+for sql in $(ssh "$REMOTE" "ls $REMOTE_DIR/z-*.sql 2>/dev/null | sort"); do
+  fname=$(basename "$sql")
+  echo "  Executing $fname ..."
+  ssh "$REMOTE" "cat '$sql' | docker exec -i dofusemu-db-1 mysql -u root -pcyonemu cyon_2.9" 2>&1 | tail -5
+done
+
+echo "=== 7. Restart server ==="
 ssh "$REMOTE" "cd $REMOTE_DIR && docker compose up -d --build --remove-orphans"
 # Wait for containers to be created/recreated
 sleep 2
-# Force restart server to pick up new JAR volume mount
+# Force restart server to pick up new JAR + fresh DB data
 ssh "$REMOTE" "cd $REMOTE_DIR && docker compose restart server"
 
-echo "=== 7. Wait for server boot ==="
+echo "=== 8. Wait for server boot ==="
 for i in $(seq 1 30); do
   sleep 2
   LAST_LINE=$(ssh "$REMOTE" "docker logs dofusemu-server-1 --tail=1 2>&1" || echo "")

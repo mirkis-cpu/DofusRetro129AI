@@ -26,7 +26,7 @@ DEBUG = false
 # Rates
 XP_PVP = 20
 XP_METIER = 5
-XP_PVM = 4
+XP_PVM = 5
 DROP = 10
 KAMAS = 40
 HONOR = 20
