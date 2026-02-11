@@ -1,6 +1,8 @@
 package objects;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import objects.Objet.ObjTemplate;
 
@@ -250,6 +252,13 @@ public class NPC_tmpl {
 				_ventes.add(temp);
 			}catch(NumberFormatException e){continue;};
 		}
+		Collections.sort(_ventes, new Comparator<ObjTemplate>() {
+			@Override
+			public int compare(ObjTemplate o1, ObjTemplate o2) {
+				int cmp = Integer.compare(o1.getLevel(), o2.getLevel());
+				return cmp != 0 ? cmp : Integer.compare(o1.getID(), o2.getID());
+			}
+		});
 	}
 
 	public int get_id() {

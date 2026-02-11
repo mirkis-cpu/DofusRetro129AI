@@ -4794,15 +4794,15 @@ public class GameThread implements Runnable
 						SocketManager.GAME_SEND_MESSAGE(_perso, "Cannot boost stats while in combat.", CyonEmu.CONFIG_MOTD_COLOR);
 						return;
 					}
-					String[] args = msg.substring(1).split(" ");
+					String[] args = msg.substring(1).trim().split("\\s+");
 					if(args.length < 3) {
 						SocketManager.GAME_SEND_MESSAGE(_perso, "Usage: <b>.stats &lt;stat&gt; &lt;amount&gt;</b>\nStats: vitality, wisdom, strength, intelligence, chance, agility\nExample: .stats vitality 100", CyonEmu.CONFIG_MOTD_COLOR);
 						return;
 					}
-					String statName = args[1].toLowerCase();
+					String statName = args[1].toLowerCase().trim();
 					int amount;
 					try {
-						amount = Integer.parseInt(args[2]);
+						amount = Integer.parseInt(args[2].trim().replaceAll("[^0-9]", ""));
 					} catch(NumberFormatException e) {
 						SocketManager.GAME_SEND_MESSAGE(_perso, "Amount must be a number.", CyonEmu.CONFIG_MOTD_COLOR);
 						return;

@@ -1302,15 +1302,20 @@ public class Personnage {
 		_sitTimer.start();
 		SocketManager.GAME_SEND_ILS_PACKET(this, 1000);
 		
-		if(!CyonEmu.CONFIG_MOTD.equals(""))//Si le motd est notifi�
+		if(!CyonEmu.CONFIG_MOTD.equals(""))
 		{
 			String color = CyonEmu.CONFIG_MOTD_COLOR;
-			if(color.equals(""))color = "000000";//Noir
-
+			if(color.equals(""))color = "000000";
 			SocketManager.GAME_SEND_MESSAGE(this, CyonEmu.CONFIG_MOTD, color);
 		}
 
-		SocketManager.GAME_SEND_MESSAGE(this, "Type <b>.info</b> to see all commands. Quick: <b>.goto X,Y</b> | <b>.stats vitality 100</b> | <b>.save</b>", "046380");
+		String rates = "<b>Server Rates:</b> XP x" + CyonEmu.XP_PVM
+			+ " | Drop x" + CyonEmu.CONFIG_DROP
+			+ " | Kamas x" + CyonEmu.KAMAS
+			+ " | Honor x" + CyonEmu.HONOR
+			+ " | Job XP x" + CyonEmu.XP_METIER;
+		SocketManager.GAME_SEND_MESSAGE(this, rates, "046380");
+		SocketManager.GAME_SEND_MESSAGE(this, "Type <b>.info</b> for commands. Quick: <b>.goto X,Y</b> | <b>.stats vitality 100</b> | <b>.save</b>", "046380");
 
 		if(_energy > 0 && _energy < 2000)
 		{
