@@ -903,9 +903,10 @@ public class SpellEffect
 		private void applyEffect_788(ArrayList<Fighter> cibles, Fight fight)
 		{
 			//caster.addBuff(effectID, value, turns, 1, false, spell, args, caster);
-			for(Fighter target : cibles) 
-			{ 
-				target.addBuff(effectID, value, turns, 1, false, spell, args, target); 
+			int chatTurns = turns * 2; // Sacrier punishment spells last 2x longer
+			for(Fighter target : cibles)
+			{
+				target.addBuff(effectID, value, chatTurns, 1, false, spell, args, target);
 			}
 		}
 

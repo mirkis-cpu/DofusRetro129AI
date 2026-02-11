@@ -225,7 +225,7 @@ public class Formulas {
 				a = (((100+i)/100)*(j/100));
 			}
 			
-			num = 2*(a*(jet * ((100 + statC + perdomC + (multiplier*100)) / 100 ))+ domC);//d�gats bruts
+			num = (a*(jet * ((100 + statC + perdomC + (multiplier*100)) / 100 ))+ domC);//d�gats bruts
 			
 		//Poisons
 		if(spellid != -1)
@@ -313,10 +313,7 @@ public class Formulas {
 				return (int)((num/25)*caster.getPDVMAX());
 			}else
 			{
-			int niveauMob = caster.get_lvl();
-			double CalculCoef = ((niveauMob*0.5)/100);
-			int Multiplicateur = (int) Math.ceil(CalculCoef);
-			return (int)num*Multiplicateur;
+				return (int)num;
 			}
 		}
 		// Fin Formule pour les MOBs

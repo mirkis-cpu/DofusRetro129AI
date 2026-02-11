@@ -2108,8 +2108,8 @@ public class Personnage {
 	{
 		if(_lvl == World.getExpLevelSize())return;
 		_lvl++;
-		_capital+=15;
-		_spellPts += 2;
+		_capital+=20;
+		_spellPts += 3;
 		_PDVMAX += 10;
 		_PDV = _PDVMAX;
 		if(_lvl == 100)
