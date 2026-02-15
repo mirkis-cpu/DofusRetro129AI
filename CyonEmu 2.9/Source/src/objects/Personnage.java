@@ -282,7 +282,7 @@ public class Personnage {
 			Effects.put(Constants.STATS_ADD_PA,  perso.get_lvl()<100?6:7);
 			Effects.put(Constants.STATS_ADD_PM, 3);
 			Effects.put(Constants.STATS_ADD_PROS, perso.get_classe()==Constants.CLASS_ENUTROF?120:100);
-			Effects.put(Constants.STATS_ADD_PODS, 1000);
+			Effects.put(Constants.STATS_ADD_PODS, 1000000);
 			Effects.put(Constants.STATS_CREATURE, 1);
 			Effects.put(Constants.STATS_ADD_INIT, 1);
 		}
@@ -293,7 +293,7 @@ public class Personnage {
 			Effects.put(Constants.STATS_ADD_PA, perso.get_lvl()<100?6:7);
 			Effects.put(Constants.STATS_ADD_PM, 3);
 			Effects.put(Constants.STATS_ADD_PROS, perso.get_classe()==Constants.CLASS_ENUTROF?120:100);
-			Effects.put(Constants.STATS_ADD_PODS, 1000);
+			Effects.put(Constants.STATS_ADD_PODS, 1000000);
 			Effects.put(Constants.STATS_CREATURE, 1);
 			Effects.put(Constants.STATS_ADD_INIT, 1);
 		}
@@ -2100,6 +2100,7 @@ public class Personnage {
 	public void refreshStats()
 	{
 		double actPdvPer = (100*(double)_PDV)/(double)_PDVMAX;
+		if(actPdvPer > 100) actPdvPer = 100;
 		_PDVMAX = (_lvl-1)*10+Constants.getBasePdv(_classe)+getTotalStats().getEffect(Constants.STATS_ADD_VITA)+getTotalStats().getEffect(Constants.STATS_ADD_VIE);
 		_PDV = (int) Math.round(_PDVMAX*actPdvPer/100);
 	}

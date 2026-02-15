@@ -2122,8 +2122,13 @@ public class Fight
 		}
 		
 		_ordreJeu.get(_curPlayer).applyBeginningTurnBuff(this);
-		if(_state == Constants.FIGHT_STATE_FINISHED)return;
-		if(_ordreJeu.get(_curPlayer).getPDV()<=0)onFighterDie(_ordreJeu.get(_curPlayer), _init0);
+		if(_state >= Constants.FIGHT_STATE_FINISHED)return;
+		if(_ordreJeu.get(_curPlayer).getPDV()<=0)
+		{
+			onFighterDie(_ordreJeu.get(_curPlayer), _init0);
+			verifIfTeamAllDead();
+			if(_state >= Constants.FIGHT_STATE_FINISHED)return;
+		}
 		
 		//On actualise les sorts launch
 		_ordreJeu.get(_curPlayer).ActualiseLaunchedSort();
@@ -2291,7 +2296,12 @@ public class Fight
 					g.onTraped(_ordreJeu.get(_curPlayer));
 				}
 			}
-			if(_ordreJeu.get(_curPlayer).getPDV() <= 0)onFighterDie(_ordreJeu.get(_curPlayer), _init0);
+			if(_ordreJeu.get(_curPlayer).getPDV() <= 0)
+			{
+				onFighterDie(_ordreJeu.get(_curPlayer), _init0);
+				verifIfTeamAllDead();
+				if(_state >= Constants.FIGHT_STATE_FINISHED) return;
+			}
 			
 			if ((this._type == Constants.FIGHT_TYPE_PVM) && (this._challenges.size() > 0) && !this._ordreJeu.get(this._curPlayer).isInvocation() && !this._ordreJeu.get(this._curPlayer).isDouble() && !this._ordreJeu.get(this._curPlayer).isPerco() && (this._ordreJeu.get(this._curPlayer).getTeam() == 0))
 	        {
@@ -3431,8 +3441,9 @@ public class Fight
 		    for(Fighter F : TEAM2)
 		    {
 		        if(F.isInvocation() || F.getMob() == null)continue;
-		        minkamas += F.getMob().getTemplate().getMinKamas();
-		        maxkamas += F.getMob().getTemplate().getMaxKamas();
+		        int mobLevel = F.getMob().getLevel();
+		        minkamas += F.getMob().getTemplate().getMinKamas() + (mobLevel * 20);
+		        maxkamas += F.getMob().getTemplate().getMaxKamas() + (mobLevel * 30);
 		        
 		        for(Drop D : F.getMob().getDrops())
 		        {
@@ -4085,7 +4096,9 @@ public class Fight
 						player.set_PDV(player.get_PDVMAX());
 					}else
 					{
-						player.set_PDV(F.getPDV());	
+						int endPdv = F.getPDV();
+						if(endPdv > player.get_PDVMAX()) endPdv = player.get_PDVMAX();
+						player.set_PDV(endPdv);
 					}
 				}
 			

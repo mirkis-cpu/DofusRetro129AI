@@ -4769,14 +4769,19 @@ public class GameThread implements Runnable
 						SocketManager.GAME_SEND_MESSAGE(_perso, "Cannot teleport while in combat.", CyonEmu.CONFIG_MOTD_COLOR);
 						return;
 					}
-					String[] args = msg.substring(1).split("[, ]+");
-					if(args.length < 3) {
+					String coordStr = msg.substring(5).trim(); // everything after ".goto"
+					if(coordStr.isEmpty()) {
+						SocketManager.GAME_SEND_MESSAGE(_perso, "Usage: <b>.goto X,Y</b> (e.g. .goto -4,16)", CyonEmu.CONFIG_MOTD_COLOR);
+						return;
+					}
+					String[] coords = coordStr.split("[,\\s]+");
+					if(coords.length < 2) {
 						SocketManager.GAME_SEND_MESSAGE(_perso, "Usage: <b>.goto X,Y</b> (e.g. .goto -4,16)", CyonEmu.CONFIG_MOTD_COLOR);
 						return;
 					}
 					try {
-						int mapX = Integer.parseInt(args[1]);
-						int mapY = Integer.parseInt(args[2]);
+						int mapX = Integer.parseInt(coords[0]);
+						int mapY = Integer.parseInt(coords[1]);
 						Carte map = World.getCarteByPosAndCont(mapX, mapY, 0);
 						if(map == null) {
 							SocketManager.GAME_SEND_MESSAGE(_perso, "No map found at coordinates [" + mapX + "," + mapY + "].", CyonEmu.CONFIG_MOTD_COLOR);

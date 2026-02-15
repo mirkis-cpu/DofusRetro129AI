@@ -236,7 +236,7 @@ public class SpellEffect
 						
 						case 107://renvoie Dom
 							String[] args = buff.getArgs().split(";");
-							float coef = 1+(target.getTotalStats().getEffect(Constants.STATS_ADD_SAGE)/100);
+							float coef = 1+(target.getTotalStats().getEffect(Constants.STATS_ADD_SAGE)/100f);
 							int renvoie = 0;
 							try
 							{
